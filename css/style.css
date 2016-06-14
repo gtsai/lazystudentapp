@@ -1,0 +1,11 @@
+nav {
+    background-color: yellow;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+nav div{
+    display: inline-block;
+}
