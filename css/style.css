@@ -1,11 +1,11 @@
 nav {
-    background-color: yellow;
+    background-color: lightslategray;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    height: 30px;
-    padding: 10px;
+    height: 40px;
+    padding-top: 15px;
     font-family: arial;
     z-index: 10;
 }
@@ -14,12 +14,71 @@ nav div{
     display: inline-block;
 }
 
-.search_bar{
-    text-align: right;
+.right-side-banner {
+    right: 0;
+    position: absolute;
 }
 
-.user_profile{
-    text-align: right;
+.chat-box {
+    position: fixed;
+    right: 0;
+    background-color: white;
+    border: solid black 2px;
+    width: 20%;
+    height: 91%;
+    top: 55px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+#chat-title {
+    font-family: Arial;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    background-color: cornflowerblue;
+}
+
+#chat-messages {
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+hr {
+    border: dashed;
+    border-width: 1px;
+}
+
+#chat-input {
+    border: solid 2px;
+    height: 70px;
+    bottom: 0;
+    width: 100%;
+}
+
+#chat-input input{
+    width: 97.5%;
+    height: 50%;
+    vertical-align: top;
+}
+
+#chat-input button {
+    right: 0;
+    margin: 5px;
+}
+
+#add-card-button {
+    width: 250px;
+    height: 300px;
+    border: solid 2px;
+    margin: 50px;
+    font-family: arial;
+    font-size: medium;
 }
 
 
@@ -37,7 +96,7 @@ nav div{
 }
 
 .card_title{
-    background-color: darkseagreen;
+    background-color: cornflowerblue;
     margin: 0;
     text-align: center;
 }
@@ -48,7 +107,7 @@ nav div{
 
 .card_tags li{
     display: inline-block;
-    background-color: dodgerblue;
+    background-color: cornflowerblue;
     border-radius: 3px;
     margin: 2px;
 }
@@ -69,18 +128,22 @@ nav div{
     width: 500px;
     min-height: 600px;
     font-family: arial;
-    position: relative;
+    position: absolute;
     border: solid;
-    margin: 5px;
+    left: 30%;
+    top: 30px;
+    background-color: white;
 }
 
 .edit_full_card{
     width: 500px;
     min-height: 600px;
     font-family: arial;
-    position: relative;
+    position: absolute;
     border: solid;
-    margin: 5px;
+    left: 30%;
+    top: 30px;
+    background-color: white;
 }
 
 .x button{
@@ -92,7 +155,7 @@ nav div{
 }
 
 .full-title h2{
-    background-color: darkseagreen;
+    background-color: cornflowerblue;
     margin: 0;
     text-align: center;
 }
@@ -106,7 +169,7 @@ nav div{
 
 .author-date {
     text-align: center;
-    background-color: darkseagreen;
+    background-color: white;
 }
 
 .full-text-content {
@@ -142,18 +205,16 @@ nav div{
 
 .enter-title form input {
     text-align: center;
-    width: 100%;
-    background-color: lightskyblue;
+    width: 99%;
+    background-color: cornflowerblue;
     font-size: medium;
     height: 50px;
 }
 
 .enter-tags form input {
     text-align: center;
-    width: 100%;
-    border: solid;
-    border-width: 1px;
-    background-color: lightskyblue;
+    width: 99%;
+    background-color: cornflowerblue;
     font-size: medium;
     height: 50px;
 }
@@ -181,3 +242,7 @@ nav div{
     padding: 20px;
 }
 
+.hide {
+    display: none;
+    z-index: 15;
+}
