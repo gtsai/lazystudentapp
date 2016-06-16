@@ -1,11 +1,11 @@
 nav {
-    background-color: yellow;
+    background-color: lightslategray;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    height: 30px;
-    padding: 10px;
+    height: 40px;
+    padding-top: 15px;
     font-family: arial;
     z-index: 10;
 }
@@ -14,14 +14,64 @@ nav div{
     display: inline-block;
 }
 
-.search_bar{
-    text-align: right;
+.right-side-banner {
+    right: 0;
+    position: absolute;
 }
 
-.user_profile{
-    text-align: right;
+.chat-box {
+    position: fixed;
+    right: 0;
+    background-color: white;
+    border: solid darkblue;
+    width: 20%;
+    height: 91%;
+    top: 55px;
+
+
 }
 
+#chat-title {
+    font-family: Arial;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    background-color: lightskyblue;
+
+}
+
+#chat-messages {
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 75%;
+}
+
+hr {
+    border: dashed;
+    border-width: 1px;
+}
+
+#chat-input {
+    border: solid;
+    height: 15%;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#chat-input input{
+    width: 97.5%;
+    height: 50%;
+    vertical-align: top;
+}
+
+#chat-input button {
+    right: 0;
+    margin: 5px;
+}
 
 .content{
     margin-top: 100px;
@@ -142,7 +192,7 @@ nav div{
 
 .enter-title form input {
     text-align: center;
-    width: 100%;
+    width: 99%;
     background-color: lightskyblue;
     font-size: medium;
     height: 50px;
@@ -150,9 +200,7 @@ nav div{
 
 .enter-tags form input {
     text-align: center;
-    width: 100%;
-    border: solid;
-    border-width: 1px;
+    width: 99%;
     background-color: lightskyblue;
     font-size: medium;
     height: 50px;
