@@ -23,12 +23,13 @@ nav div{
     position: fixed;
     right: 0;
     background-color: white;
-    border: solid darkblue;
+    border: solid black 2px;
     width: 20%;
     height: 91%;
     top: 55px;
-
-
+    display: flex;
+    flex-direction: column;
+    display: none;
 }
 
 #chat-title {
@@ -38,15 +39,14 @@ nav div{
     text-align: center;
     padding: 10px;
     margin: 0;
-    background-color: lightskyblue;
-
+    background-color: cornflowerblue;
 }
 
 #chat-messages {
     overflow: scroll;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 75%;
+    flex-grow: 1;
 }
 
 hr {
@@ -55,10 +55,9 @@ hr {
 }
 
 #chat-input {
-    border: solid;
-    height: 15%;
+    border: solid 2px;
+    height: 70px;
     bottom: 0;
-    position: absolute;
     width: 100%;
 }
 
@@ -72,6 +71,16 @@ hr {
     right: 0;
     margin: 5px;
 }
+
+#add-card-button {
+    width: 250px;
+    height: 300px;
+    border: solid 2px;
+    margin: 50px;
+    font-family: arial;
+    font-size: medium;
+}
+
 
 .content{
     margin-top: 100px;
@@ -87,7 +96,7 @@ hr {
 }
 
 .card_title{
-    background-color: darkseagreen;
+    background-color: cornflowerblue;
     margin: 0;
     text-align: center;
 }
@@ -98,7 +107,7 @@ hr {
 
 .card_tags li{
     display: inline-block;
-    background-color: dodgerblue;
+    background-color: cornflowerblue;
     border-radius: 3px;
     margin: 2px;
 }
@@ -119,18 +128,22 @@ hr {
     width: 500px;
     min-height: 600px;
     font-family: arial;
-    position: relative;
+    position: absolute;
     border: solid;
-    margin: 5px;
+    left: 30%;
+    top: 30px;
+    background-color: white;
 }
 
 .edit_full_card{
     width: 500px;
     min-height: 600px;
     font-family: arial;
-    position: relative;
+    position: absolute;
     border: solid;
-    margin: 5px;
+    left: 30%;
+    top: 30px;
+    background-color: white;
 }
 
 .x button{
@@ -142,7 +155,7 @@ hr {
 }
 
 .full-title h2{
-    background-color: darkseagreen;
+    background-color: cornflowerblue;
     margin: 0;
     text-align: center;
 }
@@ -156,7 +169,7 @@ hr {
 
 .author-date {
     text-align: center;
-    background-color: darkseagreen;
+    background-color: white;
 }
 
 .full-text-content {
@@ -193,7 +206,7 @@ hr {
 .enter-title form input {
     text-align: center;
     width: 99%;
-    background-color: lightskyblue;
+    background-color: cornflowerblue;
     font-size: medium;
     height: 50px;
 }
@@ -201,7 +214,7 @@ hr {
 .enter-tags form input {
     text-align: center;
     width: 99%;
-    background-color: lightskyblue;
+    background-color: cornflowerblue;
     font-size: medium;
     height: 50px;
 }
@@ -229,3 +242,7 @@ hr {
     padding: 20px;
 }
 
+.hide {
+    display: none;
+    z-index: 15;
+}

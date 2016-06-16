@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>Home</title>
 </head>
@@ -55,6 +56,15 @@
         <div>Author - Date:</div>
         <div>Message</div>
         <hr>
+        <div>Author - Date:</div>
+        <div>Message</div>
+        <hr>
+        <div>Author - Date:</div>
+        <div>Message</div>
+        <hr>
+        <div>Author - Date:</div>
+        <div>Message</div>
+        <hr>
     </div>
     <div id="chat-input">
         <input type="text" value="">
@@ -63,24 +73,16 @@
 
 </div>
 
+<button id="add-card-button">+Add Card</button>
 
 <div class="content">
-    <div class="preview_cards">
+    <div class="preview_cards hide" style= "display:none;">
 
         <h3 class="card_title">Title</h3>
 
         <div class="author">Author</div>
 
         <ul class="card_tags">
-            <li>Science</li>
-            <li>Math</li>
-            <li>History</li>
-            <li>Science</li>
-            <li>Math</li>
-            <li>History</li>
-            <li>Science</li>
-            <li>Math</li>
-            <li>History</li>
             <li>Science</li>
             <li>Math</li>
             <li>History</li>
@@ -94,9 +96,9 @@
 
     </div>
 
-    <div class="normal_full_card">
+    <div class="normal_full_card" style= "display:none;">
 
-        <div class="x">
+        <div class="x close-action">
             <button>X</button>
         </div>
 
@@ -138,15 +140,15 @@
 
     </div>
 
-    <div class="edit_full_card">
+    <div class="edit_full_card hide">
 
-        <div class="x">
+        <div class="x close-action">
             <button>X</button>
         </div>
         <br>
         <div class="enter-title">
            <form>
-               <input type="text" value="Enter title here">
+               <input id='new-card-title'type="text" value="Enter title here">
            </form>
         </div>
 
@@ -154,13 +156,13 @@
 
         <div class="enter-tags">
             <form>
-                <input type="text" value="Enter tags here (separate with spaces)">
+                <input id='new-card-tags' type="text" value="Enter tags here (separate with spaces)">
             </form>
         </div>
 
         <div class="enter-text-content">
             <form>
-                <input value="Enter text content here">
+                <input id='new-card-notes' value="Enter text content here">
             </form>
         </div>
 
@@ -172,10 +174,10 @@
             <table class="button_table">
                 <tr>
                     <td>
-                        <button>Cancel</button>
+                        <button class="close-action">Cancel</button>
                     </td>
                     <td>
-                        <button>Save</button>
+                        <button class="save">Save</button>
                     </td>
                 </tr>
 
