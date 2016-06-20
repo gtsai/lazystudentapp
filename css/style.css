@@ -93,6 +93,7 @@ hr {
     margin: 20px;
     font-family: arial;
     position: relative;
+    display: inline-block;
 }
 
 .card_title{
