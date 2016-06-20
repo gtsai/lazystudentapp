@@ -93,6 +93,7 @@ hr {
     margin: 20px;
     font-family: arial;
     position: relative;
+    display: inline-block;
 }
 
 .card_title{
@@ -103,6 +104,13 @@ hr {
 
 .author{
     text-align: center;
+}
+
+.preview_card_tags li{
+    display: inline-block;
+    background-color: cornflowerblue;
+    border-radius: 3px;
+    margin: 2px;
 }
 
 .card_tags li{
@@ -203,7 +211,7 @@ hr {
     position: absolute;
 }
 
-.enter-title form input {
+.enter-title input {
     text-align: center;
     width: 99%;
     background-color: cornflowerblue;
@@ -211,15 +219,23 @@ hr {
     height: 50px;
 }
 
-.enter-tags form input {
+.enter-tags input {
     text-align: center;
-    width: 99%;
-    background-color: cornflowerblue;
     font-size: medium;
-    height: 50px;
 }
 
-.enter-text-content form input {
+#tags {
+    display: inline;
+}
+
+.tag {
+    background-color: lightskyblue;
+    border-radius: 3px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.enter-text-content input {
     text-align: center;
     border: solid;
     border-width: 1px;
@@ -243,6 +259,11 @@ hr {
 }
 
 .hide {
+    display: none;
+    z-index: 15;
+}
+
+.hidden {
     display: none;
     z-index: 15;
 }
