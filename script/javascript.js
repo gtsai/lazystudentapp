@@ -4,12 +4,12 @@ var cards = [{
     notes: 'This is my note'
 }];
 
+var tags = [];
+
 var cardTitle = document.querySelector('#new-card-title');
 var cardNotes = document.querySelector('#new-card-notes');
-
-
 var element = document.getElementsByClassName("content");
-
+var cardTag = document.querySelector('#tags');
 
 
 function appendPreviewCard(){
@@ -29,8 +29,6 @@ function appendPreviewCard(){
     $(element).append(preview);
 };
 
-
-
 $(function(){
 
     fullCardContainer = $('.hide')
@@ -47,17 +45,31 @@ $(function(){
         cards.push({title: cardTitle.value,
             notes: cardNotes.value});
         appendPreviewCard();
-        cardTitle.value = "Enter title here";
-        cardNotes.value = "Enter text content here";
+        cardTitle.value = "Enter title";
+        cardNotes.value = "Enter text content";
+        cardTag.value = "Enter tag";
         console.log(cards);
         fullCardContainer.css("display", "none");
-
-
-
-
     });
 
 
+    $('#new-card-tags').on('keydown',function(e){
+        if (e.keyCode === 13) {
+            var tag = $('<div/>').addClass('tag').html(this.value);
+            tags.push(this.value);
+            console.log(tags);
+            $(cardTag).append(tag);
+            this.value = null;
+
+        }
+    });
+
+    $('#tags').on('click','.tag', function(e){
+        $(e.target).remove();
+        var a = tags.indexOf(e.target.textContent);
+        tags.splice(a,1);
+        console.log(tags);
+   });
 
 
 
