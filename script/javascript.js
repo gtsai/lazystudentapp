@@ -1,11 +1,11 @@
 var fullCardContainer;
 var cards = [{
     title: 'My new card',
+    tags: ['hi','bye'],
     notes: 'This is my note'
 }];
 
 var tags = [];
-
 var cardTitle = document.querySelector('#new-card-title');
 var cardNotes = document.querySelector('#new-card-notes');
 var element = document.getElementsByClassName("content");
@@ -13,13 +13,15 @@ var cardTag = document.querySelector('#tags');
 
 
 function appendPreviewCard(){
+    var tag_items = ''
+    for (i=0; i < tags.length; i++){
+        tag_items += `<li>${tags[i]}</li>`;
+    }
     var preview = `<div class="preview_cards">
         <h3 class="card_title">${cardTitle.value}</h3>
         <div class="author">Author</div>
-        <ul class="card_tags">
-        <li>Science</li>
-        <li>Math</li>
-        <li>History</li>
+        <ul class="preview_card_tags">
+        ${tag_items}
         </ul>
         <div class="card_thumbnail">
         <img src="images/150x150.jpg" >
@@ -31,28 +33,35 @@ function appendPreviewCard(){
 
 $(function(){
 
-    fullCardContainer = $('.hide')
+    editCardContainer = $('.hide')
+    fullCardContainer = $('.hidden')
 
     $('#add-card-button').on('click', function(){
-        fullCardContainer.css("display", "initial");
+        editCardContainer.css("display", "initial");
     });
 
     $(".close-action").on('click', function(){
+        editCardContainer.css("display", "none");
+    });
+
+    $(".full-close-action").on('click', function(){
         fullCardContainer.css("display", "none");
     });
 
     $(".save").on('click', function(){
-        cards.push({title: cardTitle.value,
+        cards.push({title: cardTitle.value, tags: tags.slice(),
             notes: cardNotes.value});
         appendPreviewCard();
         cardTitle.value = "Enter title";
         cardNotes.value = "Enter text content";
         cardTag.value = "Enter tag";
+        $(cardTag).empty();
+        tags = [];
         console.log(cards);
-        fullCardContainer.css("display", "none");
+        editCardContainer.css("display", "none");
+
     });
-
-
+    
     $('#new-card-tags').on('keydown',function(e){
         if (e.keyCode === 13) {
             var tag = $('<div/>').addClass('tag').html(this.value);
@@ -60,7 +69,6 @@ $(function(){
             console.log(tags);
             $(cardTag).append(tag);
             this.value = null;
-
         }
     });
 
@@ -70,10 +78,31 @@ $(function(){
         tags.splice(a,1);
         console.log(tags);
    });
+    
+    $('.content').on('click','.preview_cards', function(card){
+        fullCardContainer.css("display", "initial");
+        console.log(card.target.title)
+    });
 
+    for (i=0; i < cards.length; i++){
+        var tag_items = ''
+        for (j=0; j < i.tags.length; j++) {
+            tag_items += `<li>${tags[j]}</li>`;
 
-
-
+        }
+        var preview = `<div class="preview_cards">
+        <h3 class="card_title">${i.title}</h3>
+        <div class="author">Author</div>
+        <ul class="preview_card_tags">
+        ${tag_items}
+        </ul>
+        <div class="card_thumbnail">
+        <img src="images/150x150.jpg" >
+        </div>
+        <p class="upload_date">YYYY-MM-DD</p>
+        </div>`;
+        $(element).append(preview);
+    }
 
 
 

@@ -106,6 +106,13 @@ hr {
     text-align: center;
 }
 
+.preview_card_tags li{
+    display: inline-block;
+    background-color: cornflowerblue;
+    border-radius: 3px;
+    margin: 2px;
+}
+
 .card_tags li{
     display: inline-block;
     background-color: cornflowerblue;
@@ -252,6 +259,11 @@ hr {
 }
 
 .hide {
+    display: none;
+    z-index: 15;
+}
+
+.hidden {
     display: none;
     z-index: 15;
 }
