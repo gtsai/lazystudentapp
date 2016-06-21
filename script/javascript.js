@@ -1,8 +1,11 @@
 var fullCardContainer;
 var cards = [{
-    title: 'My new card',
-    tags: ['hi','bye'],
-    notes: 'This is my note'
+    title: '1st card',
+    tags: ['hello','goodbye'],
+    notes: '1st note'}, {
+    title: '2nd card',
+    tags: ['yes','no'],
+    notes: '2nd note'
 }];
 
 var tags = [];
@@ -13,11 +16,11 @@ var cardTag = document.querySelector('#tags');
 
 
 function appendPreviewCard(){
-    var tag_items = ''
+    var tag_items = '';
     for (i=0; i < tags.length; i++){
         tag_items += `<li>${tags[i]}</li>`;
     }
-    var preview = `<div class="preview_cards">
+    var preview = `<div class="preview_cards" data-index="${cards.length-1}">
         <h3 class="card_title">${cardTitle.value}</h3>
         <div class="author">Author</div>
         <ul class="preview_card_tags">
@@ -33,8 +36,27 @@ function appendPreviewCard(){
 
 $(function(){
 
-    editCardContainer = $('.hide')
-    fullCardContainer = $('.hidden')
+    for (i=0; i < cards.length; i++){
+        var tag_items = '';
+        for (j=0; j < cards[i].tags.length; j++) {
+            tag_items += `<li>${cards[i].tags[j]}</li>`;
+        }
+        var preview = `<div class="preview_cards" data-index="${i}">
+        <h3 class="card_title">${cards[i].title}</h3>
+        <div class="author">Author</div>
+        <ul class="preview_card_tags">
+        ${tag_items}
+        </ul>
+        <div class="card_thumbnail">
+        <img src="images/150x150.jpg" >
+        </div>
+        <p class="upload_date">YYYY-MM-DD</p>
+        </div>`;
+        $(element).append(preview);
+    }
+
+    editCardContainer = $('.hide');
+    fullCardContainer = $('.hidden');
 
     $('#add-card-button').on('click', function(){
         editCardContainer.css("display", "initial");
@@ -57,7 +79,6 @@ $(function(){
         cardTag.value = "Enter tag";
         $(cardTag).empty();
         tags = [];
-        console.log(cards);
         editCardContainer.css("display", "none");
 
     });
@@ -66,7 +87,6 @@ $(function(){
         if (e.keyCode === 13) {
             var tag = $('<div/>').addClass('tag').html(this.value);
             tags.push(this.value);
-            console.log(tags);
             $(cardTag).append(tag);
             this.value = null;
         }
@@ -76,39 +96,20 @@ $(function(){
         $(e.target).remove();
         var a = tags.indexOf(e.target.textContent);
         tags.splice(a,1);
-        console.log(tags);
    });
     
-    $('.content').on('click','.preview_cards', function(card){
+    $('.content').on('click','.preview_cards', function(){
+        $('.full-tags').empty();
+        var cards_index = $(this).attr('data-index');
+        $('.full-title > h2').text(cards[cards_index].title);
+        $('.full-text-content > p').text(cards[cards_index].notes);
+        var tag_items = '';
+        for (i=0; i < cards[cards_index].tags.length; i++){
+            tag_items += `<li>${cards[cards_index].tags[i]}</li>`;
+        };
+        $('.full-tags').append(tag_items);
         fullCardContainer.css("display", "initial");
-        console.log(card.target.title)
     });
-
-    for (i=0; i < cards.length; i++){
-        var tag_items = ''
-        for (j=0; j < i.tags.length; j++) {
-            tag_items += `<li>${tags[j]}</li>`;
-
-        }
-        var preview = `<div class="preview_cards">
-        <h3 class="card_title">${i.title}</h3>
-        <div class="author">Author</div>
-        <ul class="preview_card_tags">
-        ${tag_items}
-        </ul>
-        <div class="card_thumbnail">
-        <img src="images/150x150.jpg" >
-        </div>
-        <p class="upload_date">YYYY-MM-DD</p>
-        </div>`;
-        $(element).append(preview);
-    }
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,5 @@
 nav {
-    background-color: lightslategray;
+    background-color: mediumaquamarine;
     position: fixed;
     width: 100%;
     top: 0;
@@ -39,7 +39,7 @@ nav div{
     text-align: center;
     padding: 10px;
     margin: 0;
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
 }
 
 #chat-messages {
@@ -79,6 +79,9 @@ hr {
     margin: 50px;
     font-family: arial;
     font-size: medium;
+    position: relative;
+    left: 35%;
+    top:60px;
 }
 
 
@@ -97,7 +100,7 @@ hr {
 }
 
 .card_title{
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
     margin: 0;
     text-align: center;
 }
@@ -108,14 +111,14 @@ hr {
 
 .preview_card_tags li{
     display: inline-block;
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
     border-radius: 3px;
     margin: 2px;
 }
 
 .card_tags li{
     display: inline-block;
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
     border-radius: 3px;
     margin: 2px;
 }
@@ -129,7 +132,7 @@ hr {
     bottom: 0;
     right: 0;
     padding: 2px;
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
 }
 
 .normal_full_card{
@@ -163,14 +166,14 @@ hr {
 }
 
 .full-title h2{
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
     margin: 0;
     text-align: center;
 }
 
 .full-tags li {
     display: inline-block;
-    background-color: dodgerblue;
+    background-color: mediumaquamarine;
     border-radius: 3px;
     margin: 2px;
 }
@@ -214,7 +217,7 @@ hr {
 .enter-title input {
     text-align: center;
     width: 99%;
-    background-color: cornflowerblue;
+    background-color: mediumaquamarine;
     font-size: medium;
     height: 50px;
 }
@@ -229,7 +232,7 @@ hr {
 }
 
 .tag {
-    background-color: lightskyblue;
+    background-color: mediumaquamarine;
     border-radius: 3px;
     margin: 2px;
     display: inline-block;
