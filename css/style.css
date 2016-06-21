@@ -227,6 +227,13 @@ hr {
     padding: 8px;
 }
 
+.delete-button {
+    bottom: 0;
+    left: 0;
+    padding: 20px 100px;
+    position: absolute;
+}
+
 .download-button {
     bottom: 0;
     right: 0;

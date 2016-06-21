@@ -5,16 +5,18 @@ var cardTitle = document.querySelector('#new-card-title');
 var cardNotes = document.querySelector('#new-card-notes');
 var element = document.getElementsByClassName("content");
 var cardTag = document.querySelector('#tags');
-
+var messages = document.querySelector('#chat-input');
+var idToDelete
 
 function appendPreviewCard(){
-    var tag_items = '';
-    for (var i=0; i < tags.length; i++){
-        tag_items += `<li>${tags[i]}</li>`;
-    }
-    var preview = `<div class="preview_cards" data-index="${cards.length-1}">
-        <h3 class="card_title">${cardTitle.value}</h3>
-        <div class="author">Author</div>
+    for (var i=0; i < cards.length; i++) {
+        var tag_items = '';
+        for (j = 0; j < cards[i].tags.length; j++) {
+            tag_items += `<li>${cards[i].tags[j]}</li>`;
+        }
+        var preview = `<div class="preview_cards" data-index="${cards.length - 1}" data-id="${response.data[i]._id}">
+        <h3 class="card_title">${cards[i].title}</h3>
+        <div class="author">${cards[i].author}</div>
         <ul class="preview_card_tags">
         ${tag_items}
         </ul>
@@ -23,7 +25,8 @@ function appendPreviewCard(){
         </div>
         <p class="upload_date">YYYY-MM-DD</p>
     </div>`;
-    $(element).append(preview);
+        $(element).append(preview);
+    }
 };
 
 $(function(){
@@ -33,15 +36,15 @@ $(function(){
         type: "GET",
         success: function(response){
             cards = response.data;
-            console.log(cards);
+            console.log(response.data);
             for (var i=0; i < response.data.length; i++){
                 var tag_items = '';
                 for (j=0; j < response.data[i].tags.length; j++) {
                     tag_items += `<li>${response.data[i].tags[j]}</li>`;
                 }
-                var preview = `<div class="preview_cards" data-index="${i}">
+                var preview = `<div class="preview_cards" data-index="${i}" data-id="${response.data[i]._id}">
             <h3 class="card_title">${response.data[i].title}</h3>
-            <div class="author">Author</div>
+            <div class="author">${cards[i].author}</div>
             <ul class="preview_card_tags">
             ${tag_items}
             </ul>
@@ -55,6 +58,20 @@ $(function(){
         }
     });
 
+
+    $('.delete-button > button').on('click', function(){
+
+        $.ajax({
+            url: `http://thiman.me:1337/grace/${idToDelete}`,
+            type: "DELETE",
+            success: function(response){
+                fullCardContainer.css("display", "none");
+            }
+        });
+    });
+    
+    
+    
     editCardContainer = $('.hide');
     fullCardContainer = $('.hidden');
 
@@ -71,8 +88,8 @@ $(function(){
     });
 
     $(".save").on('click', function(){
-        cards.push({title: cardTitle.value, tags: tags.slice(),
-            notes: cardNotes.value});
+        //cards.push({title: cardTitle.value, tags: tags.slice(),
+            //notes: cardNotes.value});
         //appendPreviewCard();
         $.ajax({
             url: "http://thiman.me:1337/grace",
@@ -80,11 +97,12 @@ $(function(){
             data: {
                 title: cardTitle.value,
                 tags: tags.slice(),
-                body: cardNotes.value
+                body: cardNotes.value,
+                author: 'Author'
             },
             traditional: true,
             success: function(data, textStatus){
-                appendPreviewCard();
+                //appendPreviewCard();
                 console.log("Data was posted");
             }
         });
@@ -114,6 +132,8 @@ $(function(){
     
     $('.content').on('click','.preview_cards', function(){
         $('.full-tags').empty();
+        idToDelete = $(this).attr('data-id');
+        console.log(idToDelete);
         var cards_index = $(this).attr('data-index');
         $('.full-title > h2').text(cards[cards_index].title);
         $('.full-text-content > p').text(cards[cards_index].notes);
@@ -125,7 +145,16 @@ $(function(){
         fullCardContainer.css("display", "initial");
     });
 
+    $('#chat-send-button').on('click',function(){
 
+        var a = `<div>Author - Date:</div>
+        <div>${messages.value}</div>
+        <hr>`;
+
+        $('#chat-messages').append(a);
+
+
+    });
 
 
 
