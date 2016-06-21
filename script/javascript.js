@@ -2,10 +2,10 @@ var fullCardContainer;
 var cards = [{
     title: '1st card',
     tags: ['hello','goodbye'],
-    notes: 'This is my note'}, {
+    notes: '1st note'}, {
     title: '2nd card',
     tags: ['yes','no'],
-    notes: 'This is my note'
+    notes: '2nd note'
 }];
 
 var tags = [];
@@ -103,17 +103,19 @@ $(function(){
    });
     
     $('.content').on('click','.preview_cards', function(card){
+        $('.full-tags').empty();
+        var cards_index = $(this).attr('data-index');
+        console.log(cards[cards_index]);
+        $('.full-title > h2').text(cards[cards_index].title);
+        $('.full-text-content > p').text(cards[cards_index].notes);
+        var tag_items = '';
+        for (i=0; i < cards[cards_index].tags.length; i++){
+            tag_items += `<li>${cards[cards_index].tags[i]}</li>`;
+        };
+        console.log(tag_items);
+        $('.full-tags').append(tag_items);
         fullCardContainer.css("display", "initial");
-        console.log(card.target)
     });
-
-
-
-
-
-
-
-
 
 
 
