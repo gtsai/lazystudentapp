@@ -8,6 +8,13 @@ nav {
     padding-top: 15px;
     font-family: arial;
     z-index: 10;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+#left-side-banner {
+    position: relative;
+    left: 10px;
 }
 
 nav div{
@@ -15,8 +22,9 @@ nav div{
 }
 
 .right-side-banner {
-    right: 0;
+    right: 10px;
     position: absolute;
+    font-weight: bold;
 }
 
 .chat-box {
@@ -29,7 +37,9 @@ nav div{
     top: 55px;
     display: flex;
     flex-direction: column;
-    display: none;
+    font-family: Arial;
+    border-radius: 5px;
+    <!--display: none;-->
 }
 
 #chat-title {
@@ -39,6 +49,7 @@ nav div{
     text-align: center;
     padding: 10px;
     margin: 0;
+    border-radius: 3px;
     background-color: mediumaquamarine;
 }
 
@@ -47,6 +58,7 @@ nav div{
     overflow-y: scroll;
     overflow-x: hidden;
     flex-grow: 1;
+    font-size: small;
 }
 
 hr {
@@ -80,29 +92,34 @@ hr {
     font-family: arial;
     font-size: medium;
     position: relative;
-    left: 35%;
+    left: 28%;
     top:60px;
+    border-radius: 7px;
 }
-
 
 .content{
     margin-top: 100px;
+    position: relative;
+    width: 80%;
+    left: 0;
 }
 
 .preview_cards{
     border: solid;
     width: 250px;
     min-height: 300px;
-    margin: 20px;
+    margin: 5px;
     font-family: arial;
     position: relative;
     display: inline-block;
+    border-radius: 7px;
 }
 
 .card_title{
     background-color: mediumaquamarine;
     margin: 0;
     text-align: center;
+    border-radius: 3px;
 }
 
 .author{
@@ -114,6 +131,9 @@ hr {
     background-color: mediumaquamarine;
     border-radius: 3px;
     margin: 2px;
+}
+.cards_tags {
+
 }
 
 .card_tags li{
@@ -141,8 +161,8 @@ hr {
     font-family: arial;
     position: absolute;
     border: solid;
-    left: 30%;
-    top: 30px;
+    left: 37%;
+    top: -480px;
     background-color: white;
 }
 
@@ -152,8 +172,8 @@ hr {
     font-family: arial;
     position: absolute;
     border: solid;
-    left: 30%;
-    top: 30px;
+    left: 37%;
+    top: -480px;
     background-color: white;
 }
 

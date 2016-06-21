@@ -33,7 +33,7 @@ $(function(){
         type: "GET",
         success: function(response){
             cards = response.data;
-            console.log(cards)
+            console.log(cards);
             for (var i=0; i < response.data.length; i++){
                 var tag_items = '';
                 for (j=0; j < response.data[i].tags.length; j++) {
@@ -52,10 +52,8 @@ $(function(){
             </div>`;
                 $(element).append(preview);
             }
-
         }
     });
-
 
     editCardContainer = $('.hide');
     fullCardContainer = $('.hidden');
@@ -97,9 +95,6 @@ $(function(){
         $(cardTag).empty();
         tags = [];
         editCardContainer.css("display", "none");
-
-
-
     });
     
     $('#new-card-tags').on('keydown',function(e){
