@@ -1,7 +1,10 @@
 var fullCardContainer;
 var cards = [{
-    title: 'My new card',
-    tags: ['hi','bye'],
+    title: '1st card',
+    tags: ['hello','goodbye'],
+    notes: 'This is my note'}, {
+    title: '2nd card',
+    tags: ['yes','no'],
     notes: 'This is my note'
 }];
 
@@ -32,6 +35,26 @@ function appendPreviewCard(){
 };
 
 $(function(){
+
+    for (i=0; i < cards.length; i++){
+        var tag_items = '';
+        for (j=0; j < cards[i].tags.length; j++) {
+            tag_items += `<li>${cards[i].tags[j]}</li>`;
+        }
+
+        var preview = `<div class="preview_cards" data-index="${i}">
+        <h3 class="card_title">${cards[i].title}</h3>
+        <div class="author">Author</div>
+        <ul class="preview_card_tags">
+        ${tag_items}
+        </ul>
+        <div class="card_thumbnail">
+        <img src="images/150x150.jpg" >
+        </div>
+        <p class="upload_date">YYYY-MM-DD</p>
+        </div>`;
+        $(element).append(preview);
+    }
 
     editCardContainer = $('.hide')
     fullCardContainer = $('.hidden')
@@ -81,28 +104,10 @@ $(function(){
     
     $('.content').on('click','.preview_cards', function(card){
         fullCardContainer.css("display", "initial");
-        console.log(card.target.title)
+        console.log(card.target)
     });
 
-    for (i=0; i < cards.length; i++){
-        var tag_items = ''
-        for (j=0; j < i.tags.length; j++) {
-            tag_items += `<li>${tags[j]}</li>`;
 
-        }
-        var preview = `<div class="preview_cards">
-        <h3 class="card_title">${i.title}</h3>
-        <div class="author">Author</div>
-        <ul class="preview_card_tags">
-        ${tag_items}
-        </ul>
-        <div class="card_thumbnail">
-        <img src="images/150x150.jpg" >
-        </div>
-        <p class="upload_date">YYYY-MM-DD</p>
-        </div>`;
-        $(element).append(preview);
-    }
 
 
 
