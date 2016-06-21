@@ -1,13 +1,5 @@
 var fullCardContainer;
-var cards = [{
-    title: '1st card',
-    tags: ['hello','goodbye'],
-    notes: '1st note'}, {
-    title: '2nd card',
-    tags: ['yes','no'],
-    notes: '2nd note'
-}];
-
+var cards = [];
 var tags = [];
 var cardTitle = document.querySelector('#new-card-title');
 var cardNotes = document.querySelector('#new-card-notes');
@@ -17,7 +9,7 @@ var cardTag = document.querySelector('#tags');
 
 function appendPreviewCard(){
     var tag_items = '';
-    for (i=0; i < tags.length; i++){
+    for (var i=0; i < tags.length; i++){
         tag_items += `<li>${tags[i]}</li>`;
     }
     var preview = `<div class="preview_cards" data-index="${cards.length-1}">
@@ -36,24 +28,34 @@ function appendPreviewCard(){
 
 $(function(){
 
-    for (i=0; i < cards.length; i++){
-        var tag_items = '';
-        for (j=0; j < cards[i].tags.length; j++) {
-            tag_items += `<li>${cards[i].tags[j]}</li>`;
+    $.ajax({
+        url: "http://thiman.me:1337/grace",
+        type: "GET",
+        success: function(response){
+            cards = response.data;
+            console.log(cards)
+            for (var i=0; i < response.data.length; i++){
+                var tag_items = '';
+                for (j=0; j < response.data[i].tags.length; j++) {
+                    tag_items += `<li>${response.data[i].tags[j]}</li>`;
+                }
+                var preview = `<div class="preview_cards" data-index="${i}">
+            <h3 class="card_title">${response.data[i].title}</h3>
+            <div class="author">Author</div>
+            <ul class="preview_card_tags">
+            ${tag_items}
+            </ul>
+            <div class="card_thumbnail">
+            <img src="images/150x150.jpg" >
+            </div>
+            <p class="upload_date">YYYY-MM-DD</p>
+            </div>`;
+                $(element).append(preview);
+            }
+
         }
-        var preview = `<div class="preview_cards" data-index="${i}">
-        <h3 class="card_title">${cards[i].title}</h3>
-        <div class="author">Author</div>
-        <ul class="preview_card_tags">
-        ${tag_items}
-        </ul>
-        <div class="card_thumbnail">
-        <img src="images/150x150.jpg" >
-        </div>
-        <p class="upload_date">YYYY-MM-DD</p>
-        </div>`;
-        $(element).append(preview);
-    }
+    });
+
 
     editCardContainer = $('.hide');
     fullCardContainer = $('.hidden');
@@ -73,13 +75,30 @@ $(function(){
     $(".save").on('click', function(){
         cards.push({title: cardTitle.value, tags: tags.slice(),
             notes: cardNotes.value});
-        appendPreviewCard();
+        //appendPreviewCard();
+        $.ajax({
+            url: "http://thiman.me:1337/grace",
+            type: "POST",
+            data: {
+                title: cardTitle.value,
+                tags: tags.slice(),
+                body: cardNotes.value
+            },
+            traditional: true,
+            success: function(data, textStatus){
+                appendPreviewCard();
+                console.log("Data was posted");
+            }
+        });
+
         cardTitle.value = "Enter title";
         cardNotes.value = "Enter text content";
         cardTag.value = "Enter tag";
         $(cardTag).empty();
         tags = [];
         editCardContainer.css("display", "none");
+
+
 
     });
     
@@ -104,12 +123,15 @@ $(function(){
         $('.full-title > h2').text(cards[cards_index].title);
         $('.full-text-content > p').text(cards[cards_index].notes);
         var tag_items = '';
-        for (i=0; i < cards[cards_index].tags.length; i++){
+        for (var i=0; i < cards[cards_index].tags.length; i++){
             tag_items += `<li>${cards[cards_index].tags[i]}</li>`;
         };
         $('.full-tags').append(tag_items);
         fullCardContainer.css("display", "initial");
     });
+
+
+
 
 
 
