@@ -35,7 +35,6 @@ $(function(){
         url: "http://thiman.me:1337/grace",
         type: "GET",
         success: function(response){
-
             console.log(response.data);
             for (var k=0; k < response.data.length; k++){
                 var object_id = response.data[k]._id;
@@ -130,6 +129,7 @@ $(function(){
                     author: 'Author'
                 },
                 success: function(response){
+                    console.log(response);
                     var object_id = response.data._id;
                     cards[object_id] = response.data;
                     $(`#${object_id} > h3`).text(response.data.title);
@@ -168,7 +168,6 @@ $(function(){
             tags.push(this.value);
             $(cardTag).append(tag);
             this.value = null;
-            console.log(tags);
         }
     });
 
