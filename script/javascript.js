@@ -98,6 +98,12 @@ $(function(){
 
     $('#edit-existing').on('click', function(){
         fullCardContainer.css("display", "none");
+        editCardContainer.css("display", "initial");
+        document.getElementById("new-card-title").placeholder = cards[clicked_id].title;
+        document.getElementById("new-card-notes").placeholder = cards[clicked_id].body;
+
+
+
     });
 
     $(".save").on('click', function(){
