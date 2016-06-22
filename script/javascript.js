@@ -65,12 +65,14 @@ $(function(){
 
 
     $('.delete-button > button').on('click', function(){
-
         $.ajax({
             url: `http://thiman.me:1337/grace/${clicked_id}`,
             type: "DELETE",
             success: function(response){
                 fullCardContainer.css("display", "none");
+                delete cards[clicked_id];
+                $(`#${clicked_id}`).remove();
+                console.log(cards);
             }
         });
     });
@@ -108,7 +110,9 @@ $(function(){
             traditional: true,
             success: function(response){
                 appendPreviewCard(response);
-                console.log("Data was posted");
+                var object_id = response.data._id
+                cards[object_id]= response.data
+                console.log(cards)
             }
         });
         reset_title.value = null;
@@ -123,7 +127,6 @@ $(function(){
             var tag = $('<div/>').addClass('tag').html(this.value);
             tags.push(this.value);
             $(cardTag).append(tag);
-            console.log(this)
             this.value = null;
         }
     });
