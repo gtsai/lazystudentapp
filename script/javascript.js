@@ -128,10 +128,11 @@ $(function(){
                     cards[object_id] = response.data;
                     $(`#${object_id} > h3`).text(response.data.title);
                     $(`#${object_id} > ul`).empty();
+                    if (cards[clicked_id].tags.length !== 0){
                     for (var t=0; t < cards[clicked_id].tags.length; t++) {
                         var tag = `<li>${cards[clicked_id].tags[t]}</li>`;
                         $(`#${object_id} > ul`).append(tag);
-                    }
+                    }};
                     console.log(cards);
                     reset_title.value = null;
                     reset_body.value = null;
@@ -180,7 +181,12 @@ $(function(){
     $('#tags').on('click','.tag', function(e){
         $(e.target).remove();
         var b = tags.indexOf(e.target.textContent);
-        tags.splice(b, 1);
+        if (b == 0){
+            tags.pop();
+            console.log(tags)
+        } else{
+            tags.splice(b, 1);
+        }
    });
     
     $('.content').on('click','.preview_cards', function(){
