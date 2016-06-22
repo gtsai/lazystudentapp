@@ -6,6 +6,9 @@ var cardNotes = document.querySelector('#new-card-notes');
 var element = document.getElementsByClassName("content");
 var cardTag = document.querySelector('#tags');
 var chatMessage = document.querySelector('#chat-input');
+var reset_title = document.getElementById('new-card-title');
+var reset_body = document.getElementById('new-card-notes');
+var reset_message = document.getElementById('chat-input');
 
 function appendPreviewCard(response){
     var tag_items = '';
@@ -83,8 +86,8 @@ $(function(){
 
     $(".close-action").on('click', function(){
         editCardContainer.css("display", "none");
-        $(cardTitle).value = null;
-        $(cardNotes).value = null;
+        reset_title.value = null;
+        reset_body.value = null;
 
     });
 
@@ -108,8 +111,8 @@ $(function(){
                 console.log("Data was posted");
             }
         });
-        $(cardTitle).value = null;
-        $(cardNotes).value = null;
+        reset_title.value = null;
+        reset_body.value = null;
         $(cardTag).empty();
         tags = [];
         editCardContainer.css("display", "none");
@@ -151,8 +154,7 @@ $(function(){
         <div>${chatMessage.value}</div>
         <hr>`;
         $('#chat-messages').append(a);
-        $('#chat-input').value = null;
-        console.log($('#chat-input'));
+        reset_message.value = null;
     });
 
 
