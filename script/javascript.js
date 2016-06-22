@@ -178,6 +178,17 @@ $(function(){
         }
     });
 
+    $('#chat-input').on('keydown',function(e){
+        if (e.keyCode === 13) {
+            var a = `<div class="messagecontainer">Author - Date:</div>
+        <div class="messagecontainer">${chatMessage.value}</div>
+        <hr>`;
+            $('#chat-messages').append(a);
+            reset_message.value = null;
+        }
+    });
+
+
     $('#tags').on('click','.tag', function(e){
         $(e.target).remove();
         var b = tags.indexOf(e.target.textContent);
@@ -205,8 +216,8 @@ $(function(){
     });
 
     $('#chat-send-button').on('click',function(){
-        var a = `<div>Author - Date:</div>
-        <div>${chatMessage.value}</div>
+        var a = `<div class="messagecontainer">Author - Date:</div>
+        <div class="messagecontainer">${chatMessage.value}</div>
         <hr>`;
         $('#chat-messages').append(a);
         reset_message.value = null;

@@ -61,6 +61,12 @@ nav div{
     font-size: small;
 }
 
+.messagecontainer {
+    position: relative;
+    left: 3px;
+    top: 1px;
+}
+
 hr {
     border: dashed;
     border-width: 1px;
