@@ -65,6 +65,7 @@ $(function(){
 
 
     $('.delete-button > button').on('click', function(){
+        console.log(this)
         $.ajax({
             url: `http://thiman.me:1337/grace/${clicked_id}`,
             type: "DELETE",
@@ -92,6 +93,10 @@ $(function(){
     });
 
     $(".full-close-action").on('click', function(){
+        fullCardContainer.css("display", "none");
+    });
+
+    $('#edit-existing').on('click', function(){
         fullCardContainer.css("display", "none");
     });
 
