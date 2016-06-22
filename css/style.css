@@ -96,7 +96,7 @@ hr {
     font-family: arial;
     font-size: medium;
     position: relative;
-    left: 28%;
+    left: 30%;
     top:60px;
     border-radius: 7px;
 }
@@ -130,6 +130,16 @@ hr {
     text-align: center;
 }
 
+.preview_card_tags{
+    min-height:75px;
+    margin: 0;
+    margin-bottom: 5px;
+
+    /*overflow: scroll;*/
+    /*max-height: 45px;*/
+    /*overflow-x: hidden;*/
+}
+
 .preview_card_tags li{
     display: inline-block;
     background-color: mediumaquamarine;
@@ -153,10 +163,12 @@ hr {
 
 .upload_date{
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 5px;
+    right: 5px;
     padding: 2px;
     background-color: mediumaquamarine;
+    margin: 0;
+
 }
 
 .normal_full_card{
@@ -292,6 +304,7 @@ hr {
 .lower-buttons {
     position: absolute;
     bottom: 0;
+    left: 28.5%;
 }
 
 .lower-buttons table tr td {
