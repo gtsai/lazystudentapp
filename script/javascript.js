@@ -30,12 +30,10 @@ function appendPreviewCard(response){
     };
 
 $(function(){
-
     $.ajax({
         url: "http://thiman.me:1337/grace",
         type: "GET",
         success: function(response){
-
             console.log(response.data);
             for (var k=0; k < response.data.length; k++){
                 var object_id = response.data[k]._id;
@@ -73,6 +71,7 @@ $(function(){
                 delete cards[clicked_id];
                 $(`#${clicked_id}`).remove();
                 console.log(cards);
+                clicked_id = null;
             }
         });
     });
@@ -88,20 +87,68 @@ $(function(){
         editCardContainer.css("display", "none");
         reset_title.value = null;
         reset_body.value = null;
-
+        $(cardTag).empty();
+        clicked_id = null;
+        tags = [];
     });
 
     $(".full-close-action").on('click', function(){
         fullCardContainer.css("display", "none");
+        clicked_id = null;
+        tags = [];
+    });
+
+    $('#edit-existing').on('click', function(){
+        fullCardContainer.css("display", "none");
+        editCardContainer.css("display", "initial");
+        tags = cards[clicked_id].tags;
+        cardTitle.value = cards[clicked_id].title;
+        cardNotes.value = cards[clicked_id].body;
+        for (var t=0; t < cards[clicked_id].tags.length; t++) {
+            var tag = $('<div/>').addClass('tag').html(cards[clicked_id].tags[t]);
+            $(cardTag).append(tag);
+        }
     });
 
     $(".save").on('click', function(){
+        if (typeof clicked_id !== "undefined" && cards[clicked_id]){
+            console.log(tags);
+            $.ajax({
+                url: `http://thiman.me:1337/grace/${clicked_id}`,
+                type: "PATCH",
+                data: {
+                    title: cardTitle.value,
+                    tags: tags,
+                    body: cardNotes.value,
+                    author: 'Author'
+                },
+                traditional: true,
+                success: function(response){
+                    var object_id = response.data._id;
+                    cards[object_id] = response.data;
+                    $(`#${object_id} > h3`).text(response.data.title);
+                    $(`#${object_id} > ul`).empty();
+                    if (cards[clicked_id].tags.length !== 0){
+                    for (var t=0; t < cards[clicked_id].tags.length; t++) {
+                        var tag = `<li>${cards[clicked_id].tags[t]}</li>`;
+                        $(`#${object_id} > ul`).append(tag);
+                    }};
+                    console.log(cards);
+                    reset_title.value = null;
+                    reset_body.value = null;
+                    $(cardTag).empty();
+                    tags = [];
+                    editCardContainer.css("display", "none");
+                    clicked_id = null;
+                }
+            });
+        } else {
         $.ajax({
             url: "http://thiman.me:1337/grace",
             type: "POST",
             data: {
                 title: cardTitle.value,
-                tags: tags.slice(),
+                tags: tags,
                 body: cardNotes.value,
                 author: 'Author'
             },
@@ -111,13 +158,15 @@ $(function(){
                 var object_id = response.data._id
                 cards[object_id]= response.data
                 console.log(cards)
+                reset_title.value = null;
+                reset_body.value = null;
+                $(cardTag).empty();
+                tags = [];
+                editCardContainer.css("display", "none");
+                clicked_id = null;
             }
-        });
-        reset_title.value = null;
-        reset_body.value = null;
-        $(cardTag).empty();
-        tags = [];
-        editCardContainer.css("display", "none");
+        });}
+
     });
     
     $('#new-card-tags').on('keydown',function(e){
@@ -129,10 +178,26 @@ $(function(){
         }
     });
 
+    $('#chat-input').on('keydown',function(e){
+        if (e.keyCode === 13) {
+            var a = `<div class="messagecontainer">Author - Date:</div>
+        <div class="messagecontainer">${chatMessage.value}</div>
+        <hr>`;
+            $('#chat-messages').append(a);
+            reset_message.value = null;
+        }
+    });
+
+
     $('#tags').on('click','.tag', function(e){
         $(e.target).remove();
-        var a = tags.indexOf(e.target.textContent);
-        tags.splice(a,1);
+        var b = tags.indexOf(e.target.textContent);
+        if (b == 0){
+            tags.pop();
+            console.log(tags)
+        } else{
+            tags.splice(b, 1);
+        }
    });
     
     $('.content').on('click','.preview_cards', function(){
@@ -151,8 +216,8 @@ $(function(){
     });
 
     $('#chat-send-button').on('click',function(){
-        var a = `<div>Author - Date:</div>
-        <div>${chatMessage.value}</div>
+        var a = `<div class="messagecontainer">Author - Date:</div>
+        <div class="messagecontainer">${chatMessage.value}</div>
         <hr>`;
         $('#chat-messages').append(a);
         reset_message.value = null;
