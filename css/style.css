@@ -66,20 +66,20 @@ hr {
     border-width: 1px;
 }
 
-#chat-input {
+#chat-box {
     border: solid 2px;
     height: 70px;
     bottom: 0;
     width: 100%;
 }
 
-#chat-input input{
+#chat-input{
     width: 97.5%;
     height: 50%;
     vertical-align: top;
 }
 
-#chat-input button {
+#chat-box button {
     right: 0;
     margin: 5px;
 }
