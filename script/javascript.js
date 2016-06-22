@@ -76,9 +76,7 @@ $(function(){
             }
         });
     });
-    
-    
-    
+
     editCardContainer = $('.hide');
     fullCardContainer = $('.hidden');
 
