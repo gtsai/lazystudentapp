@@ -30,7 +30,6 @@ function appendPreviewCard(response){
     };
 
 $(function(){
-
     $.ajax({
         url: "http://thiman.me:1337/grace",
         type: "GET",
@@ -102,6 +101,7 @@ $(function(){
     $('#edit-existing').on('click', function(){
         fullCardContainer.css("display", "none");
         editCardContainer.css("display", "initial");
+        tags = cards[clicked_id].tags;
         cardTitle.value = cards[clicked_id].title;
         cardNotes.value = cards[clicked_id].body;
         for (var t=0; t < cards[clicked_id].tags.length; t++) {
@@ -112,12 +112,6 @@ $(function(){
 
     $(".save").on('click', function(){
         if (typeof clicked_id !== "undefined" && cards[clicked_id]){
-            var taglist = cards[clicked_id].tags;
-            if (tags.length != 0){
-                for (var item=0; item < tags.length; item++){
-                    taglist.push(tags[item])
-                }}
-            tags = taglist;
             console.log(tags);
             $.ajax({
                 url: `http://thiman.me:1337/grace/${clicked_id}`,
@@ -128,12 +122,23 @@ $(function(){
                     body: cardNotes.value,
                     author: 'Author'
                 },
+                traditional: true,
                 success: function(response){
-                    console.log(response);
                     var object_id = response.data._id;
                     cards[object_id] = response.data;
                     $(`#${object_id} > h3`).text(response.data.title);
-                    console.log(cards)
+                    $(`#${object_id} > ul`).empty();
+                    for (var t=0; t < cards[clicked_id].tags.length; t++) {
+                        var tag = `<li>${cards[clicked_id].tags[t]}</li>`;
+                        $(`#${object_id} > ul`).append(tag);
+                    }
+                    console.log(cards);
+                    reset_title.value = null;
+                    reset_body.value = null;
+                    $(cardTag).empty();
+                    tags = [];
+                    editCardContainer.css("display", "none");
+                    clicked_id = null;
                 }
             });
         } else {
@@ -142,7 +147,7 @@ $(function(){
             type: "POST",
             data: {
                 title: cardTitle.value,
-                tags: tags.slice(),
+                tags: tags,
                 body: cardNotes.value,
                 author: 'Author'
             },
@@ -152,14 +157,15 @@ $(function(){
                 var object_id = response.data._id
                 cards[object_id]= response.data
                 console.log(cards)
+                reset_title.value = null;
+                reset_body.value = null;
+                $(cardTag).empty();
+                tags = [];
+                editCardContainer.css("display", "none");
+                clicked_id = null;
             }
         });}
-        reset_title.value = null;
-        reset_body.value = null;
-        $(cardTag).empty();
-        tags = [];
-        editCardContainer.css("display", "none");
-        clicked_id = null;
+
     });
     
     $('#new-card-tags').on('keydown',function(e){
@@ -172,17 +178,9 @@ $(function(){
     });
 
     $('#tags').on('click','.tag', function(e){
-        if (typeof clicked_id !== "undefined" && cards[clicked_id]) {
-            var a = cards[clicked_id].tags.indexOf(e.target.textContent);
-            cards[clicked_id].tags.splice(a, 1);
-            $(e.target).remove();
-            console.log(cards[clicked_id])
-        } else {
-            $(e.target).remove();
-            var b = tags.indexOf(e.target.textContent);
-            console.log(b);
-            tags.splice(b, 1);
-        }
+        $(e.target).remove();
+        var b = tags.indexOf(e.target.textContent);
+        tags.splice(b, 1);
    });
     
     $('.content').on('click','.preview_cards', function(){
