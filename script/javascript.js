@@ -74,6 +74,7 @@ $(function(){
                 delete cards[clicked_id];
                 $(`#${clicked_id}`).remove();
                 console.log(cards);
+                clicked_id = null;
             }
         });
     });
@@ -89,24 +90,51 @@ $(function(){
         editCardContainer.css("display", "none");
         reset_title.value = null;
         reset_body.value = null;
-
+        $(cardTag).empty();
+        clicked_id = null;
     });
 
     $(".full-close-action").on('click', function(){
         fullCardContainer.css("display", "none");
+        clicked_id = null;
     });
 
     $('#edit-existing').on('click', function(){
         fullCardContainer.css("display", "none");
         editCardContainer.css("display", "initial");
-        document.getElementById("new-card-title").placeholder = cards[clicked_id].title;
-        document.getElementById("new-card-notes").placeholder = cards[clicked_id].body;
-
-
-
+        cardTitle.value = cards[clicked_id].title;
+        cardNotes.value = cards[clicked_id].body;
+        for (var t=0; t < cards[clicked_id].tags.length; t++) {
+            var tag = $('<div/>').addClass('tag').html(cards[clicked_id].tags[t]);
+            $(cardTag).append(tag);
+        }
     });
 
     $(".save").on('click', function(){
+        var taglist = cards[clicked_id].tags.slice();
+        if (tags.length != 0){
+        for (var item=0; item < tags.length; item++){
+            taglist.push(tags[item])
+        }}
+        console.log(taglist)
+
+        if (cards[clicked_id]){
+            $.ajax({
+                url: `http://thiman.me:1337/grace/${clicked_id}`,
+                type: "PATCH",
+                data: {
+                    title: cardTitle.value,
+                    tags: taglist,
+                    body: cardNotes.value,
+                    author: 'Author'
+                },
+                success: function(response){
+                    var object_id = response.data._id
+                    cards[object_id] = response.data
+                    console.log(cards)
+                }
+            });
+        } else {
         $.ajax({
             url: "http://thiman.me:1337/grace",
             type: "POST",
@@ -123,12 +151,15 @@ $(function(){
                 cards[object_id]= response.data
                 console.log(cards)
             }
-        });
+        });}
         reset_title.value = null;
         reset_body.value = null;
         $(cardTag).empty();
+        document.getElementById("new-card-title").placeholder = "Enter title here";
+        document.getElementById("new-card-notes").placeholder = "Enter text content here";
         tags = [];
         editCardContainer.css("display", "none");
+        clicked_id = null;
     });
     
     $('#new-card-tags').on('keydown',function(e){
@@ -137,6 +168,7 @@ $(function(){
             tags.push(this.value);
             $(cardTag).append(tag);
             this.value = null;
+            console.log(tags)
         }
     });
 
