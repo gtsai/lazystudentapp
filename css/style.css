@@ -27,6 +27,52 @@ nav div{
     font-weight: bold;
 }
 
+#userprofile {
+    border: solid;
+    border-color: #195943;
+    border-radius: 5px;
+    background-color: #5FC2A0;
+    font-family: arial;
+    color: #195943;
+    font-weight: bold;
+    font-size: medium;
+}
+
+#login-registration-container {
+    display: inline;
+}
+
+#login-window {
+    width: 250px;
+    height: 350px;
+    display: block;
+    position: absolute;
+    top: 100px;
+    left: 20%;
+    border: solid;
+    border-radius: 5px;
+    border-color: #195943;
+    padding: 30px 50px;
+    font-family: arial;
+    color: #195943;
+}
+
+#registration-window {
+    width: 250px;
+    height: 350px;
+    display: block;
+    position: absolute;
+    top: 100px;
+    right: 20%;
+    border: solid;
+    border-radius: 5px;
+    border-color: #195943;
+    padding: 30px 50px;
+    font-family: arial;
+    color: #195943;
+}
+
+
 .chat-box {
     position: fixed;
     right: 0;
