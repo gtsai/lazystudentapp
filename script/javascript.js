@@ -31,7 +31,7 @@ function appendPreviewCard(response){
 
 $(function(){
     $.ajax({
-        url: "http://thiman.me:1337/grace",
+        url: "http://localhost:3000",
         type: "GET",
         success: function(response){
             console.log(response.data);
@@ -64,7 +64,7 @@ $(function(){
 
     $('.delete-button > button').on('click', function(){
         $.ajax({
-            url: `http://thiman.me:1337/grace/${clicked_id}`,
+            url: `http://localhost:3000/${clicked_id}`,
             type: "DELETE",
             success: function(response){
                 fullCardContainer.css("display", "none");
@@ -114,7 +114,7 @@ $(function(){
         if (typeof clicked_id !== "undefined" && cards[clicked_id]){
             console.log(tags);
             $.ajax({
-                url: `http://thiman.me:1337/grace/${clicked_id}`,
+                url: `http://localhost:3000/${clicked_id}`,
                 type: "PATCH",
                 data: {
                     title: cardTitle.value,
@@ -124,6 +124,7 @@ $(function(){
                 },
                 traditional: true,
                 success: function(response){
+                    console.log(response)
                     var object_id = response.data._id;
                     cards[object_id] = response.data;
                     $(`#${object_id} > h3`).text(response.data.title);
@@ -140,11 +141,14 @@ $(function(){
                     tags = [];
                     editCardContainer.css("display", "none");
                     clicked_id = null;
+                },
+                error: function(err){
+                    console.log(err);
                 }
             });
         } else {
         $.ajax({
-            url: "http://thiman.me:1337/grace",
+            url: "http://localhost:3000",
             type: "POST",
             data: {
                 title: cardTitle.value,
