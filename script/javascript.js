@@ -31,7 +31,7 @@ function appendPreviewCard(response){
 
 $(function(){
     $.ajax({
-        url: "http://localhost:3000",
+        url: "http://localhost:3000/api",
         type: "GET",
         success: function(response){
             console.log(response.data);
@@ -64,7 +64,7 @@ $(function(){
 
     $('.delete-button > button').on('click', function(){
         $.ajax({
-            url: `http://localhost:3000/${clicked_id}`,
+            url: `http://localhost:3000/api/${clicked_id}`,
             type: "DELETE",
             success: function(response){
                 fullCardContainer.css("display", "none");
@@ -114,7 +114,7 @@ $(function(){
         if (typeof clicked_id !== "undefined" && cards[clicked_id]){
             console.log(tags);
             $.ajax({
-                url: `http://localhost:3000/${clicked_id}`,
+                url: `http://localhost:3000/api/${clicked_id}`,
                 type: "PATCH",
                 data: {
                     title: cardTitle.value,
@@ -148,7 +148,7 @@ $(function(){
             });
         } else {
         $.ajax({
-            url: "http://localhost:3000",
+            url: "http://localhost:3000/api",
             type: "POST",
             data: {
                 title: cardTitle.value,
@@ -227,8 +227,7 @@ $(function(){
         reset_message.value = null;
     });
 
-
-
+    
 
 
 });
